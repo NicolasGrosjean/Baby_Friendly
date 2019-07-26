@@ -25,7 +25,7 @@ class Database:
 
         logging.info('Call Overpass to extract data')
         api = overpass.API(endpoint='http://overpass-api.de/api/interpreter')
-        response = api.get(query)
+        response = api.get(query, verbosity='geom')
         self.osm_data = response['features']
         with open(os.path.join('data', 'overpass_data.geojson'), 'w') as outfile:
             json.dump(self.osm_data, outfile)
@@ -39,8 +39,6 @@ class Database:
                 if ext_elem['id'] == osm_elem['id']:
                     for key, value in ext_elem['properties'].items():
                         osm_elem['properties'][key] = value
-                    # FIXME Copy also temporary geometry because getting overpass data for way are bad
-                    osm_elem['geometry'] = ext_elem['geometry']
                     break
 
     def export_to_geojson(self, filters):

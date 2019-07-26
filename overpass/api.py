@@ -174,12 +174,20 @@ class API(object):
             if elem_type and elem_type == "node":
                 geometry = geojson.Point((elem.get("lon"), elem.get("lat")))
             elif elem_type and elem_type == "way":
-                points = []
                 geom = elem.get("geometry")
                 if geom:
+                    nb_nodes = 0
+                    lon = 0
+                    lat = 0
                     for coords in elem.get("geometry"):
-                        points.append((coords["lon"], coords["lat"]))
-                    geometry = geojson.LineString(points)
+                        nb_nodes += 1
+                        lon += coords["lon"]
+                        lat += coords["lat"]
+                    geometry = geojson.Point((lon/nb_nodes, lat/nb_nodes))
+            elif elem_type and elem_type == "relation":
+                lon = elem['bounds']['minlon'] + elem['bounds']['maxlon']
+                lat = elem['bounds']['minlat'] + elem['bounds']['maxlat']
+                geometry = geojson.Point((lon/2, lat/2))
             else:
                 continue
 
