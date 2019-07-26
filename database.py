@@ -31,6 +31,21 @@ class Database:
             json.dump(self.osm_data, outfile)
         logging.info('Data extracted from Overpass')
 
+    def add_additional_osm_data(self, additional_node_ids, additional_way_ids, bbox):
+        query = '('
+        for node_id in additional_node_ids:
+            query += 'node(' + str(node_id) + ')(' + bbox + ');'
+        for way_id in additional_way_ids:
+            query += 'way(' + str(way_id) + ')(' + bbox + ');'
+        query += ')'
+
+        logging.info('Call Overpass to extract additional data')
+        api = overpass.API(endpoint='http://overpass-api.de/api/interpreter')
+        response = api.get(query, verbosity='geom')
+        for elem in response['features']:
+            self.osm_data.append(elem)
+        logging.info('Additional data extracted from Overpass')
+
     def merge_with_external_data(self, filepath):
         with open(filepath) as f:
             data = json.load(f)
@@ -54,7 +69,13 @@ class Database:
 
 
 if __name__ == '__main__':
-    db = Database(['diaper=yes', 'changing_table=yes', 'highchair'], '45.1416, 5.6732, 45.2270, 5.7826')
+    bbox = '45.1416, 5.6732, 45.2270, 5.7826'
+
+    db = Database(['diaper=yes', 'changing_table=yes', 'highchair'], bbox)
+
+    additional_nodes = [616882177, 6637704290, 6640117127]
+    additional_ways = [42208752]
+    db.add_additional_osm_data(additional_nodes, additional_ways, bbox)
     db.merge_with_external_data(os.path.join('data', 'non_osm_data.geojson'))
     db.export_to_geojson([{'diaper': 'yes', 'changing_table': 'yes'}, {'highchair': None}, {'microwave': 'yes'},
                           {'calm': 'yes'}, {'toys': 'yes'}, {'stroller_parking': 'yes'}])

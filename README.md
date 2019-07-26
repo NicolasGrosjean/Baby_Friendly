@@ -43,5 +43,5 @@ You will see some geojson files creates in the data subdirectory which can use w
 
 ## Licence
 
-The project have an Apache-2.0 licence beacause of the inclusion of
+The project have an Apache-2.0 licence because of the inclusion of
 [overpass](https://github.com/mvexel/overpass-api-python-wrapper) which has this licence.

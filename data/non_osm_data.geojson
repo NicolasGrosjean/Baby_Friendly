@@ -28,5 +28,11 @@
  "properties": {"name": "Ayako Sushi", "microwave": "yes", "calm": "yes", "zen": "yes"}},
  {"type": "Feature", "id": 569587277, "geometry": {"type": "Point", "coordinates": [5.7392936, 45.171277]},
  "properties": {"name": "Maison des habitants Teisseire Malherbe", "microwave": "yes", "stroller_parking": "yes", "toys": "yes", "calm": "yes", "zen": "yes"}},
- {"type": "Feature", "id": 68283920, "geometry": {"type": "Point", "coordinates": [5.7324093, 45.1978499]},
- "properties": {"name": "La Casemate"}}]
+ {"type": "Feature", "id": 616882177, "geometry": {"coordinates": [5.751201, 45.20568], "type": "Point"},
+ "properties": {"name": "Mus\u00e9e H\u00e9bert", "stroller_parking": "yes", "calm": "yes", "zen": "yes"}},
+ {"type": "Feature", "id": 42208752, "geometry": {"coordinates": [5.711165, 45.186578], "type": "Point"},
+ "properties": {"name": "Maison des habitants Chorier-Berriat", "stroller_parking": "yes", "calm": "yes", "zen": "yes"}},
+ {"type": "Feature", "id": 6637704290, "geometry": {"coordinates": [5.706913, 45.1726378], "type": "Point"},
+ "properties": {"name": "Maison des Habitants Anatole France", "stroller_parking": "yes"}},
+ {"type": "Feature", "id": 6640117127, "geometry": {"coordinates": [5.7275912, 45.1635893], "type": "Point"},
+ "properties": {"name": "Maison des Habitants Pr\u00e9mol", "toys": "yes"}}]
