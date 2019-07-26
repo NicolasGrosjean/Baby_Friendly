@@ -23,7 +23,7 @@ activate baby_friendly
 
 Install the packages with the following commands
 ```
-conda install overpass
+conda install geojson requests
 ```
 
 ## Usage
@@ -40,3 +40,8 @@ python database.py
 ```
 
 You will see some geojson files creates in the data subdirectory which can use with umap.
+
+## Licence
+
+The project have an Apache-2.0 licence beacause of the inclusion of
+[overpass](https://github.com/mvexel/overpass-api-python-wrapper) which has this licence.
