@@ -73,11 +73,13 @@ if __name__ == '__main__':
     bbox = '45.1416, 5.6732, 45.2270, 5.7826'
 
     db = Database(['diaper=yes', 'changing_table=yes', 'highchair',
-                   'amenity=kindergarten]["school:FR"!=maternelle'], bbox)
+                   'amenity=kindergarten]["school:FR"!=maternelle',
+                   'leisure=playground'], bbox)
 
     additional_nodes = [616882177, 6637704290, 6640117127]
     additional_ways = [42208752]
     db.add_additional_osm_data(additional_nodes, additional_ways, bbox)
     db.merge_with_external_data(os.path.join('data', 'non_osm_data.geojson'))
     db.export_to_geojson([{'diaper': 'yes', 'changing_table': 'yes'}, {'highchair': None}, {'microwave': 'yes'},
-                          {'calm': 'yes'}, {'toys': 'yes'}, {'stroller_parking': 'yes'}, {'amenity': 'kindergarten'}])
+                          {'calm': 'yes'}, {'toys': 'yes'}, {'stroller_parking': 'yes'}, {'amenity': 'kindergarten'},
+                          {'leisure': 'playground'}])
