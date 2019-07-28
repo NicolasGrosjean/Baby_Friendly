@@ -11,8 +11,6 @@ class Database:
     def __init__(self, expressions, bbox):
         """
         Extract with overpass corresponding OSM data according expressions in the boundingg box.
-
-        WARNING: There is an issue with relation : https://github.com/mvexel/overpass-api-python-wrapper/issues/48
         :param expressions:
         :param bbox:
         """
@@ -63,7 +61,10 @@ class Database:
                 for key, value in or_filter.items():
                     if key in elem['properties'] and (value is None or elem['properties'][key] == value):
                         filtered_elems.append(elem)
-            with open(os.path.join('data', list(or_filter.items())[0][0] + '.geojson'), 'w') as outfile:
+            filter_name = list(or_filter.items())[0][0]
+            if list(or_filter.items())[0][1] is not None and list(or_filter.items())[0][1] != 'yes':
+                filter_name += '_' + list(or_filter.items())[0][1]
+            with open(os.path.join('data', filter_name + '.geojson'), 'w') as outfile:
                 json.dump(filtered_elems, outfile)
         logging.info('Geojson files exported')
 
@@ -71,11 +72,12 @@ class Database:
 if __name__ == '__main__':
     bbox = '45.1416, 5.6732, 45.2270, 5.7826'
 
-    db = Database(['diaper=yes', 'changing_table=yes', 'highchair'], bbox)
+    db = Database(['diaper=yes', 'changing_table=yes', 'highchair',
+                   'amenity=kindergarten]["school:FR"!=maternelle'], bbox)
 
     additional_nodes = [616882177, 6637704290, 6640117127]
     additional_ways = [42208752]
     db.add_additional_osm_data(additional_nodes, additional_ways, bbox)
     db.merge_with_external_data(os.path.join('data', 'non_osm_data.geojson'))
     db.export_to_geojson([{'diaper': 'yes', 'changing_table': 'yes'}, {'highchair': None}, {'microwave': 'yes'},
-                          {'calm': 'yes'}, {'toys': 'yes'}, {'stroller_parking': 'yes'}])
+                          {'calm': 'yes'}, {'toys': 'yes'}, {'stroller_parking': 'yes'}, {'amenity': 'kindergarten'}])
