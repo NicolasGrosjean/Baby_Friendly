@@ -166,13 +166,14 @@ class API(object):
             return r
 
     def _as_geojson(self, elements):
-
+        osm_link_prefix = 'https://www.openstreetmap.org/'
         features = []
         geometry = None
         for elem in elements:
             elem_type = elem.get("type")
             if elem_type and elem_type == "node":
                 geometry = geojson.Point((elem.get("lon"), elem.get("lat")))
+                elem.get('tags')['osm_link'] = osm_link_prefix + 'node/' + str(elem['id'])
             elif elem_type and elem_type == "way":
                 geom = elem.get("geometry")
                 if geom:
@@ -184,10 +185,12 @@ class API(object):
                         lon += coords["lon"]
                         lat += coords["lat"]
                     geometry = geojson.Point((lon/nb_nodes, lat/nb_nodes))
+                elem.get('tags')['osm_link'] = osm_link_prefix + 'way/' + str(elem['id'])
             elif elem_type and elem_type == "relation":
                 lon = elem['bounds']['minlon'] + elem['bounds']['maxlon']
                 lat = elem['bounds']['minlat'] + elem['bounds']['maxlat']
                 geometry = geojson.Point((lon/2, lat/2))
+                elem.get('tags')['osm_link'] = osm_link_prefix + 'relation/' + str(elem['id'])
             else:
                 continue
 
