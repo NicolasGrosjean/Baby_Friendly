@@ -35,4 +35,6 @@
  {"type": "Feature", "id": 6637704290, "geometry": {"coordinates": [5.706913, 45.1726378], "type": "Point"},
  "properties": {"name": "Maison des Habitants Anatole France", "stroller_parking": "yes"}},
  {"type": "Feature", "id": 6640117127, "geometry": {"coordinates": [5.7275912, 45.1635893], "type": "Point"},
- "properties": {"name": "Maison des Habitants Pr\u00e9mol", "toys": "yes"}}]
+ "properties": {"name": "Maison des Habitants Pr\u00e9mol", "toys": "yes"}},
+ {"type": "Feature", "id": 2451714444 , "geometry": {"coordinates": [5.7320959, 45.1582184], "type": "Point"},
+ "properties": {"name": "Grand Place"}}]
