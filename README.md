@@ -39,7 +39,16 @@ Run the script
 python database.py
 ```
 
-You will see some geojson files creates in the data subdirectory which can use with umap.
+You will see some geojson files creates in the data subdirectory which can be used with umap.
+
+## Stats
+
+In Grenoble sector (45.1416, 5.6732, 45.2270, 5.7826), the geojson contains data about :
+
+|Date      |Diaper|Highchair|Microwave|Toys|Calm|Stroller parking|Kindergarten|Playground|
+|----------|------|---------|---------|----|----|----------------|------------|----------|
+|2019-09-04|19    |10       |10       |7   |7   |10              |41          |282       |
+|2019-08-03|19    |9        |10       |7   |7   |10              |40          |275       |
 
 ## Licence
 

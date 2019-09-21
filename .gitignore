@@ -3,3 +3,5 @@
 *.exe
 *.spec
 *.log
+data/
+~data/non_osm_data.geojson
